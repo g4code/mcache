@@ -1,0 +1,15 @@
+{
+  "name": "mcache",
+  "description": "mcache php library",
+  "keywords": [],
+  "license": "MIT",
+  "authors": [],
+  "autoload": {
+    "psr-0": {"Mcache\\": "src/"}
+  },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*"
+  },
+  "require": {
+  }
+}
