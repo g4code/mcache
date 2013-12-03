@@ -5,18 +5,15 @@ use G4\Mcache\Mcache;
 class McacheTest extends \PHPUnit_Framework_TestCase
 {
 
+    private $_driverStub;
+
     private $_mcache;
 
 
     public function setUp()
     {
-        $driver = $this->getMock("\G4\Mcache\Driver\Libmemcached");
-
-        $driver->expects($this->any())
-               ->method('delete')
-               ->will($this->returnValue(true));
-
-        $this->_mcache = new \G4\Mcache\Mcache($driver);
+        $this->_driverStub = $this->getMock("\G4\Mcache\Driver\Libmemcached");
+        $this->_mcache     = new \G4\Mcache\Mcache($this->_driverStub);
 
         parent::setUp();
     }
@@ -24,7 +21,10 @@ class McacheTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        unset($this->_mcache);
+        unset(
+            $this->_driverStub,
+            $this->_mcache
+        );
 
         parent::tearDown();
     }
@@ -32,7 +32,32 @@ class McacheTest extends \PHPUnit_Framework_TestCase
 
     public function testDelete()
     {
+        $this->_driverStub
+            ->expects($this->any())
+            ->method('delete')
+            ->will($this->returnValue(true));
+
         $this->assertTrue($this->_mcache->delete());
+    }
+
+    public function testGet()
+    {
+        $this->_driverStub
+            ->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue(true));
+
+        $this->assertTrue($this->_mcache->get());
+    }
+
+    public function testSet()
+    {
+        $this->_driverStub
+            ->expects($this->any())
+            ->method('set')
+            ->will($this->returnValue(true));
+
+        $this->assertTrue($this->_mcache->set());
     }
 
 }
