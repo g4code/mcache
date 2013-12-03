@@ -2,8 +2,7 @@
 
 namespace G4\Mcache\Driver;
 
-use Gee\Log\Writer;
-use Mcache\Driver\DriverAbstract;
+use G4\Mcache\Driver\DriverAbstract;
 
 class Libmemcached extends DriverAbstract
 {
