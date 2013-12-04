@@ -21,7 +21,6 @@
   "autoload": {
     "psr-0": {"G4\\Mcache\\": "src/"}
   },
-  "target-dir": "G4/Mcache",
   "require-dev": {
     "phpunit/phpunit": "3.7.*"
   },
