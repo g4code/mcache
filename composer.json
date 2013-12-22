@@ -1,5 +1,5 @@
 {
-  "name": "g4code/mcache",
+  "name": "g4/mcache",
   "type": "library",
   "description": "mcache php library",
   "keywords": [
@@ -10,12 +10,16 @@
   "license": "MIT",
   "authors": [
     {
+        "name": "Drasko Gomboc",
+        "email": "drasko.gomboc@gmail.com"
+    },
+    {
         "name": "Dejan Samardzija",
         "email": "samardzijadejan@gmail.com"
     },
     {
-        "name": "Drasko Gomboc",
-        "email": "drasko.gomboc@gmail.com"
+        "name": "Ivan Krickovic",
+        "email": "ivan.krickovic@gmail.com"
     }
   ],
   "autoload": {
