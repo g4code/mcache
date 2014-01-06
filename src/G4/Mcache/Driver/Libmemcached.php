@@ -40,9 +40,9 @@ class Libmemcached extends DriverAbstract
         return $this->_connect()->get($key);
     }
 
-    public function set($key, $value)
+    public function set($key, $value, $expiration)
     {
-        return $this->_connect()->set($key, $value);
+        return $this->_connect()->set($key, $value, $expiration);
     }
 
     public function delete($key)
