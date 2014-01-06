@@ -19,7 +19,7 @@ class Mcache
     /**
      * @var mixed (object|string)
      */
-    private $_object;
+    private $_value;
 
 
     public function __construct(\G4\Mcache\Driver\DriverInterface $driver)
@@ -44,6 +44,14 @@ class Mcache
     }
 
     /**
+     * @return mixed
+     */
+    public function get()
+    {
+        return $this->_driver->get($this->_getKey());
+    }
+
+    /**
      * Obsolete: use key() method
      * @param mixed $id
      * @return \G4\Mcache\Mcache
@@ -65,22 +73,30 @@ class Mcache
     }
 
     /**
-     * @return mixed
-     */
-    public function get()
-    {
-        return $this->_driver->get($this->_getKey());
-    }
-
-    /**
      * Obsolete: use value() method
      * @param mixed $object
      * @return \G4\Mcache\Mcache
      */
     public function object($object)
     {
-        $this->_object = $object;
+        $this->_value = $object;
         return $this;
+    }
+
+    public function replace()
+    {
+        return $this->_driver->replace(
+            $this->_getKey(),
+            $this->_value,
+            $this->_expiration);
+    }
+
+    public function set()
+    {
+        return $this->_driver->set(
+            $this->_getKey(),
+            $this->_value,
+            $this->_expiration);
     }
 
     /**
@@ -89,16 +105,8 @@ class Mcache
      */
     public function value($value)
     {
-        $this->_object = $value;
+        $this->_value = $value;
         return $this;
-    }
-
-    public function set()
-    {
-        return $this->_driver->set(
-            $this->_getKey(),
-            $this->_object,
-            $this->_expiration);
     }
 
     private function _concatKeyParts()
