@@ -4,18 +4,21 @@ namespace G4\Mcache\Driver;
 
 use G4\Mcache\Driver\DriverAbstract;
 
-class Libmemcached extends DriverAbstract
+class Couchbase extends DriverAbstract
 {
-
-    /**
-     * @var bool
-     */
-    private $_compression;
 
     /**
      * @var array
      */
     private $_servers = array();
+
+    private $_bucket;
+
+    private $_user;
+
+    private $_pass;
+
+    private $_persistent;
 
     /**
      * @param string $host
@@ -32,27 +35,23 @@ class Libmemcached extends DriverAbstract
             throw new \Exception('Options must be set');
         }
 
+        if(!isset($options['bucket']) || empty($options['bucket'])) {
+            throw new \Exception('Bucket name must be set for Couchbase driver');
+        }
+
         foreach($options['servers'] as $server) {
 
-            if(empty($server['host']) || !is_string($server['host'])) {
+            if(empty($server) || !is_string($server)) {
                 throw new \Exception('Server host is invalid');
             }
 
-            $port = empty($server['port']) ? $server['port'] : 11211;
-
-            $this->_servers[] = array(
-                'host'   => $server['host'],
-                'port'   => $port,
-            );
-
-            if(!empty($server['weight'])) {
-                $this->_servers['weight'] = $server['weight'];
-            }
+            $this->_servers[] = $server;
         }
 
-        if(isset($options['compression'])) {
-            $this->_compression = $options['compression'];
-        }
+        $this->_bucket     = $options['bucket'];
+        $this->_user       = isset($options['user']) ? $options['user']        : '';
+        $this->_pass       = isset($options['pass']) ? $options['pass']        : '';
+        $this->_persistent = isset($options['pass']) ? (bool) $options['pass'] : false;
 
         return $this;
     }
@@ -82,7 +81,7 @@ class Libmemcached extends DriverAbstract
      */
     protected function _connect()
     {
-        if(! $this->_driver instanceof \Memcached) {
+        if(! $this->_driver instanceof \Couchbase) {
             $this->_driverFactory();
         }
 
@@ -93,11 +92,12 @@ class Libmemcached extends DriverAbstract
     {
         $this->_processOptions();
 
-        $this->_driver = new \Memcached();
-        $this->_driver->addServers($this->_servers);
-
-        if (isset($this->_compression)) {
-            $this->_driver->setOption(\Memcached::OPT_COMPRESSION, $this->_compression);
-        }
+        $this->_driver = new \Couchbase(
+            $this->_servers,
+            $this->_user,
+            $this->_pass,
+            $this->_bucket,
+            $this->_persistent
+        );
     }
 }

@@ -9,12 +9,16 @@ interface DriverInterface
 
     public function get($key);
 
-    public function getPrefix();
-
     public function replace($key, $value, $expiration);
 
     public function set($key, $value, $expiration);
 
     public function setPrefix($prefix);
+
+    public function getPrefix();
+
+    public function setOptions($options);
+
+    public function getOptions();
 
 }
