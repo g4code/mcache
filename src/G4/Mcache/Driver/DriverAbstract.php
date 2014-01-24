@@ -9,8 +9,13 @@ abstract class DriverAbstract implements DriverInterface
     /**
      * @var string
      */
-    protected $_prefix;
+    private $_prefix;
 
+    /**
+     * @var array
+     */
+    private $_options = array();
+    
     /**
      * @return string
      */
@@ -28,6 +33,27 @@ abstract class DriverAbstract implements DriverInterface
     {
         $this->_prefix = $prefix;
         return $this;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see \G4\Mcache\Driver\DriverInterface::setOptions()
+     * @return \G4\Mcache\Driver\DriverAbstract
+     */
+    public function setOptions($options)
+    {
+ 		$this->_options = $options;
+ 		return $this;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \G4\Mcache\Driver\DriverInterface::getOptions()
+     * return $array
+     */
+    public function getOptions()
+    {
+    	return $this->_options;
     }
 
 }
