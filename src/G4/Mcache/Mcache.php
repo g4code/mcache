@@ -58,8 +58,7 @@ class Mcache
      */
     public function id($id)
     {
-        $this->_id = $id;
-        return $this;
+        return $this->key($id);
     }
 
     /**
@@ -79,8 +78,7 @@ class Mcache
      */
     public function object($object)
     {
-        $this->_value = $object;
-        return $this;
+        return $this->value($object);
     }
 
     public function replace()
