@@ -36,6 +36,7 @@ Find it on [packagist](https://packagist.org/packages/g4/mcache)
 
 ### Couchbase instance
 
+``` php
     <?php
     
     $driverName = 'Couchbase';
@@ -48,9 +49,11 @@ Find it on [packagist](https://packagist.org/packages/g4/mcache)
     $prefix = 'my_prefix';
     
     $mcache = \G4\Mcache\McacheFactory::createInstance($driverName, $options, $prefix);
+```    
     
 ### Methods
 
+``` php
     <?php
     
     // Get from cache
@@ -81,9 +84,7 @@ Find it on [packagist](https://packagist.org/packages/g4/mcache)
         ->key('my_key')
         ->value('my_value')
         ->replace();
-    
-    
-
+```
 
 ## Development
 
