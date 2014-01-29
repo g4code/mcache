@@ -19,71 +19,73 @@ Find it on [packagist](https://packagist.org/packages/g4/mcache)
 
 ### Memcached instance
 
-    <?php
+``` php
+<?php
     
-    $driverName = 'Libmemcached';
-    $options = array(
-        'servers' => array(
-            array(
-                'host' => 127.0.0.1
-                'port' => 11211
-            )
-        );
+$driverName = 'Libmemcached';
+$options = array(
+    'servers' => array(
+        array(
+            'host' => 127.0.0.1
+            'port' => 11211
+        )
     );
-    $prefix = 'my_prefix';
+);
+$prefix = 'my_prefix';
     
-    $mcache = \G4\Mcache\McacheFactory::createInstance($driverName, $options, $prefix);
+$mcache = \G4\Mcache\McacheFactory::createInstance($driverName, $options, $prefix);
+```
 
 ### Couchbase instance
 
 ``` php
-    <?php
+<?php
     
-    $driverName = 'Couchbase';
-    $options = array(
-        'bucket' => 'my_bucket',
-        'servers' => array(
-            '127.0.0.1:8091'
-        );
+$driverName = 'Couchbase';
+$options = array(
+    'bucket' => 'my_bucket',
+    'servers' => array(
+        '127.0.0.1:8091'
     );
-    $prefix = 'my_prefix';
+);
+$prefix = 'my_prefix';
     
-    $mcache = \G4\Mcache\McacheFactory::createInstance($driverName, $options, $prefix);
+$mcache = \G4\Mcache\McacheFactory::createInstance($driverName, $options, $prefix);
 ```    
     
 ### Methods
 
 ``` php
-    <?php
+<?php
     
-    // Get from cache
-    $value = $mcache
-        ->key('my_key')
-        ->get();
+// Get from cache
+$value = $mcache
+    ->key('my_key')
+    ->get();
     
-    // Save to cache
-    $mcache
-        ->key('my_key')
-        ->value('my_value')
-        ->set();
+// Save to cache
+$mcache
+    ->key('my_key')
+    ->value('my_value')
+    ->set();
     
-    // Sava to cache with expiration
-    $mcache
-        ->key('my_key')
-        ->value('my_value')
-        ->expiration(3600) // in seconds (default 0)
-        ->set();
+// Sava to cache with expiration
+$mcache
+    ->key('my_key')
+    ->value('my_value')
+    ->expiration(3600) // in seconds (default 0)
+    ->set();
     
-    // Delete from cache
-    $mcache
-        ->key('my_key')
-        ->delete();
+// Delete from cache
+$mcache
+    ->key('my_key')
+    ->delete();
     
-    // Replace a value
-    $mcache
-        ->key('my_key')
-        ->value('my_value')
-        ->replace();
+// Replace a value
+$mcache
+    ->key('my_key')
+    ->value('my_value')
+    ->replace();
 ```
 
 ## Development
