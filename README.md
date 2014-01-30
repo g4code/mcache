@@ -6,7 +6,7 @@ mcache
 ## Install
 
 Install through  [composer](https://getcomposer.org/) package manager.
-Find it on [packagist](https://packagist.org/packages/g4/mcache)
+Find it on [packagist](https://packagist.org/packages/g4/mcache).
 
     require: "g4/mcache": "*"
 
