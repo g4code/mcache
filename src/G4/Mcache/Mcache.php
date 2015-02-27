@@ -5,6 +5,8 @@ namespace G4\Mcache;
 class Mcache
 {
 
+    const EMPTY_VALUE = 'MCACHE|EMPTY|VALUE';
+
     const KEY_SEPARATOR = '|';
 
     /**
