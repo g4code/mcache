@@ -25,7 +25,7 @@ class Couchbase extends DriverAbstract
      * @param int $port
      * @param int $weight
      *
-     * @return \G4\Mcache\Driver\Libmemcached
+     * @return \G4\Mcache\Driver\Couchbase
      */
     private function _processOptions()
     {
