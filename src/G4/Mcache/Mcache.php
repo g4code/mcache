@@ -5,6 +5,11 @@ namespace G4\Mcache;
 class Mcache
 {
 
+    const TYPE_DELETE  = 'delete';
+    const TYPE_GET     = 'get';
+    const TYPE_REPLACE = 'replace';
+    const TYPE_SET     = 'set';
+
     const EMPTY_VALUE = 'MCACHE|EMPTY|VALUE';
 
     const KEY_SEPARATOR = '|';
@@ -12,27 +17,39 @@ class Mcache
     /**
      * @var \G4\Mcache\Driver\DriverInterface
      */
-    private $_driver = null;
+    private $driver;
 
-    private $_expiration;
+    /**
+     * @var int
+     */
+    private $expiration;
 
-    private $_id;
+    /**
+     * @var string
+     */
+    private $id;
+
+    /**
+     * @var \G4\Mcache\Profiler\Ticker
+     */
+    private $profiler;
 
     /**
      * @var mixed (object|string)
      */
-    private $_value;
+    private $value;
 
 
     public function __construct(\G4\Mcache\Driver\DriverInterface $driver)
     {
-        $this->_driver     = $driver;
-        $this->_expiration = 0;
+        $this->driver     = $driver;
+        $this->expiration = 0;
+        $this->profiler   = \G4\Mcache\Profiler\Ticker::getInstance();
     }
 
     public function delete()
     {
-        return $this->_driver->delete($this->_getKey());
+        return $this->execute(self::TYPE_DELETE);
     }
 
     /**
@@ -41,7 +58,7 @@ class Mcache
      */
     public function expiration($expiration)
     {
-        $this->_expiration = $expiration;
+        $this->expiration = $expiration;
         return $this;
     }
 
@@ -50,7 +67,7 @@ class Mcache
      */
     public function get()
     {
-        return $this->_driver->get($this->_getKey());
+        return $this->execute(self::TYPE_GET);
     }
 
     /**
@@ -69,7 +86,7 @@ class Mcache
      */
     public function key($key)
     {
-        $this->_id = $key;
+        $this->id = $key;
         return $this;
     }
 
@@ -85,18 +102,12 @@ class Mcache
 
     public function replace()
     {
-        return $this->_driver->replace(
-            $this->_getKey(),
-            $this->_value,
-            $this->_expiration);
+        return $this->execute(self::TYPE_REPLACE);
     }
 
     public function set()
     {
-        return $this->_driver->set(
-            $this->_getKey(),
-            $this->_value,
-            $this->_expiration);
+        return $this->execute(self::TYPE_SET);
     }
 
     /**
@@ -105,19 +116,45 @@ class Mcache
      */
     public function value($value)
     {
-        $this->_value = $value;
+        $this->value = $value;
         return $this;
     }
 
-    private function _concatKeyParts()
+    private function concatKeyParts()
     {
         return join(self::KEY_SEPARATOR , array(
-            $this->_driver->getPrefix(),
-            $this->_id));
+            $this->driver->getPrefix(),
+            $this->id));
     }
 
-    private function _getKey()
+    //TODO: Drasko: Extract this to new class!
+    private function execute($type)
     {
-        return md5($this->_concatKeyParts());
+        $uniqueId = $this->profiler->start();
+        switch ($type) {
+            case self::TYPE_GET:
+                $response = $this->driver->get($this->getKey());
+                break;
+            case self::TYPE_DELETE:
+                $response = $this->driver->delete($this->getKey());
+                break;
+            case self::TYPE_REPLACE:
+                $response = $this->driver->replace($this->getKey(), $this->value, $this->expiration);
+                break;
+            case self::TYPE_SET:
+                $response = $this->driver->set($this->getKey(), $this->value, $this->expiration);
+                break;
+        }
+        $this->profiler
+            ->setKey($uniqueId, $this->concatKeyParts())
+            ->setType($uniqueId, $type)
+            ->setHit($uniqueId, $response !== false)
+            ->end($uniqueId);
+        return $response;
+    }
+
+    private function getKey()
+    {
+        return md5($this->concatKeyParts());
     }
 }
