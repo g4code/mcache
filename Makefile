@@ -14,8 +14,8 @@ install:
 	&& /bin/echo -e "${TITLE} dependencies installed"
 
 self-update:
-	@ /bin/echo -e "${TITLE} running composer self update" \
-	&& php composer.phar self-update"
+	@/bin/echo -e "${TITLE} running composer self update" \
+	&& php composer.phar self-update
 
 test:
 	@/bin/echo -e "${TITLE} testing suite started..." \
