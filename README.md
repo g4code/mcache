@@ -27,10 +27,7 @@ composer require g4/mcache
 $driverName = 'Libmemcached';
 $options = array(
     'servers' => array(
-        array(
-            'host' => 127.0.0.1
-            'port' => 11211
-        )
+        '127.0.0.1:11211'
     );
 );
 $prefix = 'my_prefix';

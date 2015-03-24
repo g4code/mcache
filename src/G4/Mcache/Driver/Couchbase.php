@@ -10,15 +10,21 @@ class Couchbase extends DriverAbstract
     /**
      * @var array
      */
-    private $_servers = array();
+    private $servers = array();
 
-    private $_bucket;
+    /**
+     * @var string
+     */
+    private $bucket;
 
-    private $_user;
+    /**
+     * @var string
+     */
+    private $user;
 
-    private $_pass;
+    private $pass;
 
-    private $_persistent;
+    private $persistent;
 
     /**
      * @param string $host
@@ -27,7 +33,7 @@ class Couchbase extends DriverAbstract
      *
      * @return \G4\Mcache\Driver\Couchbase
      */
-    private function _processOptions()
+    private function processOptions()
     {
         $options = $this->getOptions();
 
@@ -40,64 +46,62 @@ class Couchbase extends DriverAbstract
         }
 
         foreach($options['servers'] as $server) {
-
             if(empty($server) || !is_string($server)) {
-                throw new \Exception('Server host is invalid');
+                continue;
             }
-
-            $this->_servers[] = $server;
+            $this->servers[] = $server;
         }
-
-        $this->_bucket     = $options['bucket'];
-        $this->_user       = isset($options['user']) ? $options['user']        : '';
-        $this->_pass       = isset($options['pass']) ? $options['pass']        : '';
-        $this->_persistent = isset($options['pass']) ? (bool) $options['pass'] : false;
+        var_dump($this->servers);
+        die;
+        $this->bucket     = $options['bucket'];
+        $this->user       = isset($options['user']) ? $options['user']        : '';
+        $this->pass       = isset($options['pass']) ? $options['pass']        : '';
+        $this->persistent = isset($options['pass']) ? (bool) $options['pass'] : false;
 
         return $this;
     }
 
     public function get($key)
     {
-        return $this->_connect()->get($key);
+        return $this->connect()->get($key);
     }
 
     public function set($key, $value, $expiration)
     {
-        return $this->_connect()->set($key, $value, $expiration);
+        return $this->connect()->set($key, $value, $expiration);
     }
 
     public function delete($key)
     {
-        return $this->_connect()->delete($key);
+        return $this->connect()->delete($key);
     }
 
     public function replace($key, $value, $expiration)
     {
-        return $this->_connect()->replace($key, $value, $expiration);
+        return $this->connect()->replace($key, $value, $expiration);
     }
 
     /**
      * @return \Memcached
      */
-    protected function _connect()
+    protected function connect()
     {
-        if(! $this->_driver instanceof \Couchbase) {
-            $this->_driverFactory();
+        if(! $this->driver instanceof \Couchbase) {
+            $this->driverFactory();
         }
-
-        return $this->_driver;
+        return $this->driver;
     }
 
-    private function _driverFactory()
+    private function driverFactory()
     {
-        $this->_processOptions();
+        $this->processOptions();
 
-        $this->_driver = new \Couchbase(
-            $this->_servers,
-            $this->_user,
-            $this->_pass,
-            $this->_bucket,
-            $this->_persistent
+        $this->driver = new \Couchbase(
+            $this->servers,
+            $this->user,
+            $this->pass,
+            $this->bucket,
+            $this->persistent
         );
     }
 }

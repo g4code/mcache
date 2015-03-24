@@ -4,24 +4,25 @@ namespace G4\Mcache\Driver;
 
 abstract class DriverAbstract implements DriverInterface
 {
-    protected $_driver = null;
+
+    protected $driver = null;
 
     /**
      * @var string
      */
-    private $_prefix;
+    private $prefix;
 
     /**
      * @var array
      */
-    private $_options = array();
-    
+    private $options = array();
+
     /**
      * @return string
      */
     public function getPrefix()
     {
-        return $this->_prefix;
+        return $this->prefix;
     }
 
     /**
@@ -31,7 +32,7 @@ abstract class DriverAbstract implements DriverInterface
      */
     public function setPrefix($prefix)
     {
-        $this->_prefix = $prefix;
+        $this->prefix = $prefix;
         return $this;
     }
 
@@ -42,10 +43,10 @@ abstract class DriverAbstract implements DriverInterface
      */
     public function setOptions($options)
     {
- 		$this->_options = $options;
- 		return $this;
+        $this->options = $options;
+        return $this;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see \G4\Mcache\Driver\DriverInterface::getOptions()
@@ -53,7 +54,6 @@ abstract class DriverAbstract implements DriverInterface
      */
     public function getOptions()
     {
-    	return $this->_options;
+        return $this->options;
     }
-
 }

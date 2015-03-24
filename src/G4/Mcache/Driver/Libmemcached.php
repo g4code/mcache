@@ -7,15 +7,17 @@ use G4\Mcache\Driver\DriverAbstract;
 class Libmemcached extends DriverAbstract
 {
 
+    const DELIMITER = ':';
+
     /**
      * @var bool
      */
-    private $_compression;
+    private $compression;
 
     /**
      * @var array
      */
-    private $_servers = array();
+    private $servers = array();
 
     /**
      * @param string $host
@@ -24,7 +26,7 @@ class Libmemcached extends DriverAbstract
      *
      * @return \G4\Mcache\Driver\Libmemcached
      */
-    private function _processOptions()
+    private function processOptions()
     {
         $options = $this->getOptions();
 
@@ -34,24 +36,22 @@ class Libmemcached extends DriverAbstract
 
         foreach($options['servers'] as $server) {
 
-            if(empty($server['host']) || !is_string($server['host'])) {
-                throw new \Exception('Server host is invalid');
+            $serverData = explode(self::DELIMITER, $server);
+
+            if (count($serverData) != 2) {
+                continue;
             }
-
-            $port = empty($server['port']) ? $server['port'] : 11211;
-
-            $this->_servers[] = array(
-                'host'   => $server['host'],
-                'port'   => $port,
+            $this->servers[] = array(
+                'host'   => $serverData[0],
+                'port'   => $serverData[1],
             );
-
             if(!empty($server['weight'])) {
-                $this->_servers['weight'] = $server['weight'];
+                $this->servers['weight'] = $server['weight'];
             }
         }
 
         if(isset($options['compression'])) {
-            $this->_compression = $options['compression'];
+            $this->compression = $options['compression'];
         }
 
         return $this;
@@ -59,45 +59,44 @@ class Libmemcached extends DriverAbstract
 
     public function get($key)
     {
-        return $this->_connect()->get($key);
+        return $this->connect()->get($key);
     }
 
     public function set($key, $value, $expiration)
     {
-        return $this->_connect()->set($key, $value, $expiration);
+        return $this->connect()->set($key, $value, $expiration);
     }
 
     public function delete($key)
     {
-        return $this->_connect()->delete($key);
+        return $this->connect()->delete($key);
     }
 
     public function replace($key, $value, $expiration)
     {
-        return $this->_connect()->replace($key, $value, $expiration);
+        return $this->connect()->replace($key, $value, $expiration);
     }
 
     /**
      * @return \Memcached
      */
-    protected function _connect()
+    protected function connect()
     {
-        if(! $this->_driver instanceof \Memcached) {
-            $this->_driverFactory();
+        if(!$this->driver instanceof \Memcached) {
+            $this->driverFactory();
         }
-
-        return $this->_driver;
+        return $this->driver;
     }
 
-    private function _driverFactory()
+    private function driverFactory()
     {
-        $this->_processOptions();
+        $this->processOptions();
 
-        $this->_driver = new \Memcached();
-        $this->_driver->addServers($this->_servers);
+        $this->driver = new \Memcached();
+        $this->driver->addServers($this->servers);
 
-        if (isset($this->_compression)) {
-            $this->_driver->setOption(\Memcached::OPT_COMPRESSION, $this->_compression);
+        if (isset($this->compression)) {
+            $this->driver->setOption(\Memcached::OPT_COMPRESSION, $this->compression);
         }
     }
 }
