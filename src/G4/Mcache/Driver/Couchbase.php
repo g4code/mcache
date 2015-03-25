@@ -52,9 +52,9 @@ class Couchbase extends DriverAbstract
             $this->servers[] = $server;
         }
         $this->bucket     = $options['bucket'];
-        $this->user       = isset($options['user']) ? $options['user']        : '';
-        $this->pass       = isset($options['pass']) ? $options['pass']        : '';
-        $this->persistent = isset($options['pass']) ? (bool) $options['pass'] : false;
+        $this->user       = isset($options['user'])       ? $options['user']        : '';
+        $this->pass       = isset($options['pass'])       ? $options['pass']        : '';
+        $this->persistent = isset($options['persistent']) ? (bool) $options['persistent'] : false;
 
         return $this;
     }
