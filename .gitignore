@@ -13,3 +13,4 @@ vendor
 .project
 .settings
 .idea/
+.vagrant/
