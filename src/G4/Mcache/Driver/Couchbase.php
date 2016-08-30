@@ -3,6 +3,7 @@
 namespace G4\Mcache\Driver;
 
 use G4\Mcache\Driver\DriverAbstract;
+use G4\Mcache\Driver\Couchbase\Couchbase1x;
 
 class Couchbase extends DriverAbstract
 {
@@ -82,24 +83,18 @@ class Couchbase extends DriverAbstract
     /**
      * @return \Memcached
      */
-    protected function connect()
+    private function connect()
     {
-        if(! $this->driver instanceof \Couchbase) {
-            $this->driverFactory();
+        if(! $this->driver instanceof Couchbase1x) {
+            $this->processOptions();
+            $this->driver = new Couchbase1x(
+                $this->servers,
+                $this->user,
+                $this->pass,
+                $this->bucket,
+                $this->persistent
+            );
         }
         return $this->driver;
-    }
-
-    private function driverFactory()
-    {
-        $this->processOptions();
-
-        $this->driver = new \Couchbase(
-            $this->servers,
-            $this->user,
-            $this->pass,
-            $this->bucket,
-            $this->persistent
-        );
     }
 }

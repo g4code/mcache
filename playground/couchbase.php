@@ -18,3 +18,7 @@ $key = 'tralala';
 $mcache->key($key)->value('data data')->set();
 
 var_dump($mcache->key($key)->get());
+
+$mcache->key($key)->value('data data')->delete();
+
+var_dump($mcache->key($key)->get());
