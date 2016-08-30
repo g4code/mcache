@@ -2,8 +2,9 @@
 
 namespace G4\Mcache\Driver;
 
-use G4\Mcache\Driver\DriverAbstract;
 use G4\Mcache\Driver\Couchbase\Couchbase1x;
+use G4\Mcache\Driver\Couchbase\Couchbase2x;
+use G4\Mcache\Driver\Couchbase\CouchbaseInterface;
 
 class Couchbase extends DriverAbstract
 {
@@ -80,13 +81,15 @@ class Couchbase extends DriverAbstract
         return $this->connect()->replace($key, $value, $expiration);
     }
 
-    /**
-     * @return \Memcached
-     */
     private function connect()
     {
-        if(! $this->driver instanceof Couchbase1x) {
-            $this->processOptions();
+        if ($this->driver instanceof CouchbaseInterface) {
+            return $this->driver;
+        }
+
+        $this->processOptions();
+
+        if (class_exists('\Couchbase')) {
             $this->driver = new Couchbase1x(
                 $this->servers,
                 $this->user,
@@ -94,6 +97,16 @@ class Couchbase extends DriverAbstract
                 $this->bucket,
                 $this->persistent
             );
+        } else if (class_exists('\CouchbaseCluster')) {
+            $this->driver = new Couchbase2x(
+                $this->servers,
+                $this->user,
+                $this->pass,
+                $this->bucket,
+                $this->persistent
+            );
+        } else {
+            throw new \Exception('Couchbase client missing!', 601);
         }
         return $this->driver;
     }

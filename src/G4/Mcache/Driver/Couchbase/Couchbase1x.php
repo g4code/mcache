@@ -2,7 +2,7 @@
 
 namespace G4\Mcache\Driver\Couchbase;
 
-class Couchbase1x
+class Couchbase1x implements CouchbaseInterface
 {
 
     private $client;
