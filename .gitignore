@@ -14,3 +14,4 @@ vendor
 .settings
 .idea/
 .vagrant/
+tests/unit/coverage/
