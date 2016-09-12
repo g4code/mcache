@@ -28,7 +28,7 @@ class Couchbase2x implements CouchbaseInterface
 
     public function __construct($servers, $user, $pass, $bucket, $persistent)
     {
-        $this->server       = array_rand($servers);
+        $this->server       = $servers[array_rand($servers)];
         $this->user         = $user;
         $this->pass         = $pass;
         $this->bucket       = $bucket;

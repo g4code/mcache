@@ -6,7 +6,8 @@ $driverName = 'Couchbase';
 $options = array(
     'bucket' => 'mcache',
     'servers' => array(
-        '127.0.0.1:8091'
+        '127.0.0.1:8091',
+        null,
     )
 );
 $prefix = 'my_prefix';
