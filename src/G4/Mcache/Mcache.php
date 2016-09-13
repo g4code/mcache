@@ -133,16 +133,16 @@ class Mcache
         $uniqueId = $this->profiler->start();
         switch ($type) {
             case self::TYPE_GET:
-                $response = unserialize($this->driver->get($this->getKey()));
+                $response = $this->transformValue($this->driver->get($this->getKey()));
                 break;
             case self::TYPE_DELETE:
                 $response = $this->driver->delete($this->getKey());
                 break;
             case self::TYPE_REPLACE:
-                $response = $this->driver->replace($this->getKey(), serialize($this->value), $this->expiration);
+                $response = $this->driver->replace($this->getKey(), $this->getValue(), $this->expiration);
                 break;
             case self::TYPE_SET:
-                $response = $this->driver->set($this->getKey(), serialize($this->value), $this->expiration);
+                $response = $this->driver->set($this->getKey(), $this->getValue(), $this->expiration);
                 break;
         }
         $this->profiler
@@ -156,5 +156,16 @@ class Mcache
     private function getKey()
     {
         return md5($this->concatKeyParts());
+    }
+
+    private function getValue()
+    {
+        return serialize($this->value);
+    }
+
+    private function transformValue($value)
+    {
+        $unserializeValue = @unserialize($value); //Drasko: "In case the passed string is not unserializeable, FALSE is returned and E_NOTICE is issued."
+        return is_string($value) && $unserializeValue !== false ? unserialize($value) : $value;
     }
 }
