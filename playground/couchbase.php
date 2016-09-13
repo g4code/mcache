@@ -15,11 +15,12 @@ $prefix = 'my_prefix';
 $mcache = \G4\Mcache\McacheFactory::createInstance($driverName, $options, $prefix);
 
 $key = 'tralala';
+$value = new \G4\Mcache\Mcache(new \G4\Mcache\Driver\Libmemcached());
 
-var_dump($mcache->key($key)->value('data data')->set());
+var_dump($mcache->key($key)->value($value)->set());
 
 var_dump($mcache->key($key)->get());
 
-var_dump($mcache->key($key)->value('data data')->delete());
+var_dump($mcache->key($key)->delete());
 
 var_dump($mcache->key($key)->get());

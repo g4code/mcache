@@ -133,16 +133,16 @@ class Mcache
         $uniqueId = $this->profiler->start();
         switch ($type) {
             case self::TYPE_GET:
-                $response = $this->driver->get($this->getKey());
+                $response = unserialize($this->driver->get($this->getKey()));
                 break;
             case self::TYPE_DELETE:
                 $response = $this->driver->delete($this->getKey());
                 break;
             case self::TYPE_REPLACE:
-                $response = $this->driver->replace($this->getKey(), $this->value, $this->expiration);
+                $response = $this->driver->replace($this->getKey(), serialize($this->value), $this->expiration);
                 break;
             case self::TYPE_SET:
-                $response = $this->driver->set($this->getKey(), $this->value, $this->expiration);
+                $response = $this->driver->set($this->getKey(), serialize($this->value), $this->expiration);
                 break;
         }
         $this->profiler
