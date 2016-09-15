@@ -160,12 +160,11 @@ class Mcache
 
     private function getValue()
     {
-        return serialize($this->value);
+        return $this->value;
     }
 
     private function transformValue($value)
     {
-        $unserializeValue = @unserialize($value); //Drasko: "In case the passed string is not unserializeable, FALSE is returned and E_NOTICE is issued."
-        return is_string($value) && $unserializeValue !== false ? unserialize($value) : $value;
+        return $value;
     }
 }
