@@ -29,7 +29,8 @@
     "phpunit/phpunit": "3.7.*"
   },
   "require": {
-    "php"        : ">=5.3.3",
-    "g4/profiler": "*"
+    "php"             : ">=5.3.3",
+    "g4/profiler"     : "*",
+    "g4/value-object" : "2.*"
   }
 }

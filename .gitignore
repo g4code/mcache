@@ -15,3 +15,5 @@ vendor
 .idea/
 .vagrant/
 tests/unit/coverage/
+tests/unit/fixtures/*
+!tests/unit/fixtures/.gitkeep

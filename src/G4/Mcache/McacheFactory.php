@@ -4,12 +4,14 @@ namespace G4\Mcache;
 
 class McacheFactory
 {
-    const DRIVER_MEMCACHED = 'Libmemcached';
-    const DRIVER_COUCHBASE = 'Couchbase';
+    const DRIVER_MEMCACHED  = 'Libmemcached';
+    const DRIVER_COUCHBASE  = 'Couchbase';
+    const DRIVER_FILE       = 'File';
 
     private static $_validDrivers = array(
         self::DRIVER_MEMCACHED,
         self::DRIVER_COUCHBASE,
+        self::DRIVER_FILE,
     );
 
     /**
