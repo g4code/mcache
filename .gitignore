@@ -6,6 +6,8 @@
 *.pid
 *.gz
 
+.DS_Store
+
 composer.phar
 vendor
 
