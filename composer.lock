@@ -7,6 +7,67 @@
     "content-hash": "a7329d31c59c26d8ea5ceb64cbfc0e44",
     "packages": [
         {
+            "name": "aura/accept",
+            "version": "2.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/auraphp/Aura.Accept.git",
+                "reference": "1c40bc38333a7899b95823a4d85ab758f7c618b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/auraphp/Aura.Accept/zipball/1c40bc38333a7899b95823a4d85ab758f7c618b2",
+                "reference": "1c40bc38333a7899b95823a4d85ab758f7c618b2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "aura/di": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "aura": {
+                    "type": "library",
+                    "config": {
+                        "common": "Aura\\Accept\\_Config\\Common"
+                    }
+                },
+                "branch-alias": {
+                    "dev-develop-2": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aura\\Accept\\": "src/",
+                    "Aura\\Accept\\_Config\\": "config/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Aura.Accept Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Accept/contributors"
+                }
+            ],
+            "description": "Provides content-negotiation tools using Accept* headers.",
+            "homepage": "https://github.com/auraphp/Aura.Accept",
+            "keywords": [
+                "accept",
+                "accept-charset",
+                "accept-encoding",
+                "accept-language",
+                "content negotiation",
+                "content type",
+                "media type"
+            ],
+            "time": "2015-03-27T17:05:44+00:00"
+        },
+        {
             "name": "g4/buffer",
             "version": "0.1.0",
             "source": {
@@ -56,17 +117,111 @@
             "time": "2014-04-27T21:50:58+00:00"
         },
         {
-            "name": "g4/di",
-            "version": "1.0.0",
+            "name": "g4/clean-core",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/g4code/di.git",
-                "reference": "3a371abd0e8c52d82e830de55efaa4d1275a73c4"
+                "url": "https://github.com/g4code/clean-core.git",
+                "reference": "ca80bb4bbc9da5260a2311acb3560e84fb5ade1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/g4code/di/zipball/3a371abd0e8c52d82e830de55efaa4d1275a73c4",
-                "reference": "3a371abd0e8c52d82e830de55efaa4d1275a73c4",
+                "url": "https://api.github.com/repos/g4code/clean-core/zipball/ca80bb4bbc9da5260a2311acb3560e84fb5ade1b",
+                "reference": "ca80bb4bbc9da5260a2311acb3560e84fb5ade1b",
+                "shasum": ""
+            },
+            "require": {
+                "g4/constants": "*",
+                "php": ">=5.4",
+                "zendframework/zend-paginator": "2.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "G4\\CleanCore\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Drasko Gomboc",
+                    "email": "drasko.gomboc@gmail.com"
+                },
+                {
+                    "name": "Dejan Samardzija",
+                    "email": "samardzija.dejan@gmail.com"
+                },
+                {
+                    "name": "Ivan Krickovic",
+                    "email": "ivan.krickovic@gmail.com"
+                }
+            ],
+            "description": "clean-core php library",
+            "keywords": [
+                "clean architecture",
+                "clean core",
+                "service",
+                "use case"
+            ],
+            "time": "2018-08-14T07:10:58+00:00"
+        },
+        {
+            "name": "g4/constants",
+            "version": "0.6.17",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/g4code/constants.git",
+                "reference": "ce72afb576e44884b5efb00fb2d332ac081807a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/g4code/constants/zipball/ce72afb576e44884b5efb00fb2d332ac081807a9",
+                "reference": "ce72afb576e44884b5efb00fb2d332ac081807a9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "G4\\Constants\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dejan Samardzija",
+                    "email": "samardzija.dejan@gmail.com"
+                }
+            ],
+            "description": "G4 constants that are used for all day stuff and this is good way to organize them",
+            "keywords": [
+                "constants"
+            ],
+            "time": "2018-08-22T07:44:27+00:00"
+        },
+        {
+            "name": "g4/di",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/g4code/di.git",
+                "reference": "85e34d37178c8d4726f4a9620d3e975bb9bb9f54"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/g4code/di/zipball/85e34d37178c8d4726f4a9620d3e975bb9bb9f54",
+                "reference": "85e34d37178c8d4726f4a9620d3e975bb9bb9f54",
                 "shasum": ""
             },
             "require": {
@@ -103,24 +258,75 @@
                 "di",
                 "pimple"
             ],
-            "time": "2015-09-28T12:52:20+00:00"
+            "time": "2018-03-08T11:35:55+00:00"
         },
         {
-            "name": "g4/log",
-            "version": "0.12.0",
+            "name": "g4/http",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/g4code/log.git",
-                "reference": "e68c2d643eb79509dff4e6e9c27ea0dbaca61ca3"
+                "url": "https://github.com/g4code/http.git",
+                "reference": "616916e440eee714fb4519cdf790f72c3957997d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/g4code/log/zipball/e68c2d643eb79509dff4e6e9c27ea0dbaca61ca3",
-                "reference": "e68c2d643eb79509dff4e6e9c27ea0dbaca61ca3",
+                "url": "https://api.github.com/repos/g4code/http/zipball/616916e440eee714fb4519cdf790f72c3957997d",
+                "reference": "616916e440eee714fb4519cdf790f72c3957997d",
                 "shasum": ""
             },
             "require": {
-                "g4/profiler": "*",
+                "g4/constants": "*",
+                "g4/value-object": "*",
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "G4\\Http\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Drasko Gomboc",
+                    "email": "drasko.gomboc@gmail.com"
+                },
+                {
+                    "name": "Dejan Samardzija",
+                    "email": "samardzija.dejan@gmail.com"
+                },
+                {
+                    "name": "Ivan Krickovic",
+                    "email": "ivan.krickovic@gmail.com"
+                }
+            ],
+            "description": "g4 http request and response objects, for now taken and edited from ZF1",
+            "keywords": [
+                "http",
+                "request",
+                "response"
+            ],
+            "time": "2018-08-22T07:59:38+00:00"
+        },
+        {
+            "name": "g4/log",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/g4code/log.git",
+                "reference": "2b0dc33adf271851e669f3e87d97060fcd44cb59"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/g4code/log/zipball/2b0dc33adf271851e669f3e87d97060fcd44cb59",
+                "reference": "2b0dc33adf271851e669f3e87d97060fcd44cb59",
+                "shasum": ""
+            },
+            "require": {
+                "g4/runner": "*",
                 "g4/utility": "*",
                 "php": ">=5.3.3"
             },
@@ -161,26 +367,29 @@
                 "logger",
                 "writer"
             ],
-            "time": "2017-06-02T07:13:05+00:00"
+            "time": "2018-08-22T07:41:20+00:00"
         },
         {
             "name": "g4/profiler",
-            "version": "0.90.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/g4code/profiler.git",
-                "reference": "ea7636861410113be23443b57b5a7208e3448c8e"
+                "reference": "a01a7546cca347f3be5ab8291b2d06fb63417a95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/g4code/profiler/zipball/ea7636861410113be23443b57b5a7208e3448c8e",
-                "reference": "ea7636861410113be23443b57b5a7208e3448c8e",
+                "url": "https://api.github.com/repos/g4code/profiler/zipball/a01a7546cca347f3be5ab8291b2d06fb63417a95",
+                "reference": "a01a7546cca347f3be5ab8291b2d06fb63417a95",
                 "shasum": ""
             },
             "require": {
                 "g4/buffer": "*",
+                "g4/clean-core": "*",
                 "g4/di": "*",
                 "g4/log": "*",
+                "g4/runner": "*",
+                "g4/utility": "*",
                 "php": ">=5.4"
             },
             "type": "library",
@@ -213,25 +422,84 @@
                 "performance",
                 "profiler"
             ],
-            "time": "2017-07-28T11:37:05+00:00"
+            "time": "2018-07-12T11:26:57+00:00"
         },
         {
-            "name": "g4/utility",
-            "version": "0.1.2",
+            "name": "g4/runner",
+            "version": "0.10.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/g4code/utility.git",
-                "reference": "542721db5b8ceb87543df9bd37f1bb0d85716d9b"
+                "url": "https://github.com/g4code/runner.git",
+                "reference": "fb6efc23b1cac619e60e4d011d111fdcdbd3ec8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/g4code/utility/zipball/542721db5b8ceb87543df9bd37f1bb0d85716d9b",
-                "reference": "542721db5b8ceb87543df9bd37f1bb0d85716d9b",
+                "url": "https://api.github.com/repos/g4code/runner/zipball/fb6efc23b1cac619e60e4d011d111fdcdbd3ec8f",
+                "reference": "fb6efc23b1cac619e60e4d011d111fdcdbd3ec8f",
+                "shasum": ""
+            },
+            "require": {
+                "aura/accept": "2.2.2",
+                "g4/clean-core": "*",
+                "g4/di": "*",
+                "g4/http": "*",
+                "g4/profiler": "*",
+                "php": ">=5.4",
+                "twig/extensions": "^1.2",
+                "twig/twig": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "G4\\Runner\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Drasko Gomboc",
+                    "email": "drasko.gomboc@gmail.com"
+                },
+                {
+                    "name": "Dejan Samardzija",
+                    "email": "samardzija.dejan@gmail.com"
+                },
+                {
+                    "name": "Ivan Krickovic",
+                    "email": "ivan.krickovic@gmail.com"
+                }
+            ],
+            "description": "g4 application runner - bootstrapper",
+            "keywords": [
+                "application",
+                "bootstrap",
+                "run"
+            ],
+            "time": "2017-06-12T12:11:28+00:00"
+        },
+        {
+            "name": "g4/utility",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/g4code/utility.git",
+                "reference": "e0c9138aab61a53d88f32bb66201b075f3f44f1d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/g4code/utility/zipball/e0c9138aab61a53d88f32bb66201b075f3f44f1d",
+                "reference": "e0c9138aab61a53d88f32bb66201b075f3f44f1d",
                 "shasum": ""
             },
             "require": {
                 "g4/di": "*",
                 "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "5.*"
             },
             "type": "library",
             "autoload": {
@@ -263,27 +531,29 @@
                 "tools",
                 "utility"
             ],
-            "time": "2015-06-05T09:46:55+00:00"
+            "time": "2017-11-16T08:36:57+00:00"
         },
         {
             "name": "g4/value-object",
-            "version": "2.6.2",
+            "version": "2.40.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/g4code/value-object.git",
-                "reference": "bbed2c9af3c04bde5e9ac5fb8adc297ba74a1cfa"
+                "reference": "bd1b10c5e2bc2752bd28f7ece36eb23cbd45796c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/g4code/value-object/zipball/bbed2c9af3c04bde5e9ac5fb8adc297ba74a1cfa",
-                "reference": "bbed2c9af3c04bde5e9ac5fb8adc297ba74a1cfa",
+                "url": "https://api.github.com/repos/g4code/value-object/zipball/bd1b10c5e2bc2752bd28f7ece36eb23cbd45796c",
+                "reference": "bd1b10c5e2bc2752bd28f7ece36eb23cbd45796c",
                 "shasum": ""
             },
             "require": {
                 "ramsey/uuid": "3.6.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "5.*"
+                "g4/code-coverage": "1.*",
+                "phpunit/phpunit": "5.*",
+                "squizlabs/php_codesniffer": "3.*"
             },
             "type": "library",
             "autoload": {
@@ -314,20 +584,20 @@
                 }
             ],
             "description": "PHP value objects",
-            "time": "2017-08-10T20:19:23+00:00"
+            "time": "2018-07-10T12:11:27+00:00"
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.10",
+            "version": "v2.0.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d"
+                "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/634bae8e911eefa89c1abfbf1b66da679ac8f54d",
-                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/29af24f25bab834fcbb38ad2a69fa93b867e070d",
+                "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d",
                 "shasum": ""
             },
             "require": {
@@ -359,23 +629,24 @@
             "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
             "keywords": [
                 "csprng",
+                "polyfill",
                 "pseudorandom",
                 "random"
             ],
-            "time": "2017-03-13T16:27:32+00:00"
+            "time": "2018-07-04T16:31:37+00:00"
         },
         {
             "name": "pimple/pimple",
-            "version": "v3.2.2",
+            "version": "v3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "4d45fb62d96418396ec58ba76e6f065bca16e10a"
+                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/4d45fb62d96418396ec58ba76e6f065bca16e10a",
-                "reference": "4d45fb62d96418396ec58ba76e6f065bca16e10a",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/9e403941ef9d65d20cba7d54e29fe906db42cf32",
+                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32",
                 "shasum": ""
             },
             "require": {
@@ -412,7 +683,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2017-07-23T07:32:15+00:00"
+            "time": "2018-01-21T07:42:36+00:00"
         },
         {
             "name": "predis/predis",
@@ -594,6 +865,296 @@
                 "uuid"
             ],
             "time": "2017-03-26T20:37:53+00:00"
+        },
+        {
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "e3d826245268269cd66f8326bd8bc066687b4a19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/e3d826245268269cd66f8326bd8bc066687b4a19",
+                "reference": "e3d826245268269cd66f8326bd8bc066687b4a19",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                },
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "time": "2018-08-06T14:22:27+00:00"
+        },
+        {
+            "name": "twig/extensions",
+            "version": "v1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig-extensions.git",
+                "reference": "2c1a86526d0044065220d1b51ac08348bea5ca82"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/2c1a86526d0044065220d1b51ac08348bea5ca82",
+                "reference": "2c1a86526d0044065220d1b51ac08348bea5ca82",
+                "shasum": ""
+            },
+            "require": {
+                "twig/twig": "^1.27|^2.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^3.4",
+                "symfony/translation": "^2.7|^3.4"
+            },
+            "suggest": {
+                "symfony/translation": "Allow the time_diff output to be translated"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_Extensions_": "lib/"
+                },
+                "psr-4": {
+                    "Twig\\Extensions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Common additional features for Twig that do not directly belong in core",
+            "keywords": [
+                "i18n",
+                "text"
+            ],
+            "time": "2018-05-22T13:26:07+00:00"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.35.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "7e081e98378a1e78c29cc9eba4aefa5d78a05d2a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7e081e98378a1e78c29cc9eba4aefa5d78a05d2a",
+                "reference": "7e081e98378a1e78c29cc9eba4aefa5d78a05d2a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "require-dev": {
+                "psr/container": "^1.0",
+                "symfony/debug": "^2.7",
+                "symfony/phpunit-bridge": "^3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.35-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                },
+                "psr-4": {
+                    "Twig\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+                },
+                {
+                    "name": "Twig Team",
+                    "homepage": "https://twig.symfony.com/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "https://twig.symfony.com",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2018-07-13T07:12:17+00:00"
+        },
+        {
+            "name": "zendframework/zend-paginator",
+            "version": "2.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-paginator.git",
+                "reference": "fd58828c8280a90f133b9e0af2fe1a7885d47206"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-paginator/zipball/fd58828c8280a90f133b9e0af2fe1a7885d47206",
+                "reference": "fd58828c8280a90f133b9e0af2fe1a7885d47206",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0 || ^5.6",
+                "zendframework/zend-stdlib": "^2.7 || ^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.2.1 || ^5.7.15",
+                "zendframework/zend-cache": "^2.6.1",
+                "zendframework/zend-coding-standard": "~1.0.0",
+                "zendframework/zend-config": "^2.6.0",
+                "zendframework/zend-db": "^2.9.2",
+                "zendframework/zend-filter": "^2.6.1",
+                "zendframework/zend-json": "^2.6.1",
+                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
+                "zendframework/zend-view": "^2.6.3"
+            },
+            "suggest": {
+                "zendframework/zend-cache": "Zend\\Cache component to support cache features",
+                "zendframework/zend-db": "Zend\\Db component",
+                "zendframework/zend-filter": "Zend\\Filter component",
+                "zendframework/zend-json": "Zend\\Json component",
+                "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
+                "zendframework/zend-view": "Zend\\View component"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev",
+                    "dev-develop": "2.9-dev"
+                },
+                "zf": {
+                    "component": "Zend\\Paginator",
+                    "config-provider": "Zend\\Paginator\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Paginator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "zend-paginator is a flexible component for paginating collections of data and presenting that data to users.",
+            "homepage": "https://github.com/zendframework/zend-paginator",
+            "keywords": [
+                "paginator",
+                "zf2"
+            ],
+            "time": "2018-01-30T15:52:44+00:00"
+        },
+        {
+            "name": "zendframework/zend-stdlib",
+            "version": "3.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-stdlib.git",
+                "reference": "66536006722aff9e62d1b331025089b7ec71c065"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/66536006722aff9e62d1b331025089b7ec71c065",
+                "reference": "66536006722aff9e62d1b331025089b7ec71c065",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "phpbench/phpbench": "^0.13",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
+                "zendframework/zend-coding-standard": "~1.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev",
+                    "dev-develop": "3.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Stdlib\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "SPL extensions, array utilities, error handlers, and more",
+            "keywords": [
+                "ZendFramework",
+                "stdlib",
+                "zf"
+            ],
+            "time": "2018-08-28T21:34:05+00:00"
         }
     ],
     "packages-dev": [
@@ -660,16 +1221,16 @@
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "1.4.2",
+            "version": "1.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "3cc8f69b3028d0f96a9078e6295d86e9bf019be5"
+                "reference": "730b01bc3e867237eaac355e06a36b85dd93a8b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/3cc8f69b3028d0f96a9078e6295d86e9bf019be5",
-                "reference": "3cc8f69b3028d0f96a9078e6295d86e9bf019be5",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/730b01bc3e867237eaac355e06a36b85dd93a8b4",
+                "reference": "730b01bc3e867237eaac355e06a36b85dd93a8b4",
                 "shasum": ""
             },
             "require": {
@@ -703,7 +1264,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2016-10-03T07:40:28+00:00"
+            "time": "2017-11-27T13:52:08+00:00"
         },
         {
             "name": "phpunit/php-text-template",
@@ -969,20 +1530,21 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.26",
+            "version": "v2.8.45",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "4c29dec8d489c4e37cf87ccd7166cd0b0e6a45c5"
+                "reference": "fbf876678e29dc634430dcf0096e216eb0004467"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/4c29dec8d489c4e37cf87ccd7166cd0b0e6a45c5",
-                "reference": "4c29dec8d489c4e37cf87ccd7166cd0b0e6a45c5",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/fbf876678e29dc634430dcf0096e216eb0004467",
+                "reference": "fbf876678e29dc634430dcf0096e216eb0004467",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9"
+                "php": ">=5.3.9",
+                "symfony/polyfill-ctype": "~1.8"
             },
             "type": "library",
             "extra": {
@@ -1014,7 +1576,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-01T20:52:29+00:00"
+            "time": "2018-07-26T09:03:18+00:00"
         }
     ],
     "aliases": [],
