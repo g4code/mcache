@@ -9,6 +9,8 @@ use G4\Mcache\Driver\Couchbase\CouchbaseInterface;
 class Couchbase extends DriverAbstract
 {
 
+    const DEFAULT_TIMEOUT_VALUE = 2500000; // time in microseconds
+
     /**
      * @var array
      */
@@ -27,6 +29,8 @@ class Couchbase extends DriverAbstract
     private $pass;
 
     private $persistent;
+
+    private $timeout;
 
     /**
      * @param string $host
@@ -53,10 +57,11 @@ class Couchbase extends DriverAbstract
             }
             $this->servers[] = $server;
         }
-        $this->bucket     = $options['bucket'];
-        $this->user       = isset($options['user'])       ? $options['user']        : '';
-        $this->pass       = isset($options['pass'])       ? $options['pass']        : '';
-        $this->persistent = isset($options['persistent']) ? (bool) $options['persistent'] : false;
+        $this->bucket       = $options['bucket'];
+        $this->user         = isset($options['user'])       ? $options['user']              : '';
+        $this->pass         = isset($options['pass'])       ? $options['pass']              : '';
+        $this->persistent   = isset($options['persistent']) ? (bool) $options['persistent'] : false;
+        $this->timeout      = isset($options['timeout'])    ? (int) $options['timeout']     : self::DEFAULT_TIMEOUT_VALUE;
 
         return $this;
     }
@@ -95,7 +100,8 @@ class Couchbase extends DriverAbstract
                 $this->user,
                 $this->pass,
                 $this->bucket,
-                $this->persistent
+                $this->persistent,
+                $this->timeout
             );
         } else if (class_exists('\CouchbaseCluster')) {
             $this->driver = new Couchbase2x(
@@ -103,7 +109,8 @@ class Couchbase extends DriverAbstract
                 $this->user,
                 $this->pass,
                 $this->bucket,
-                $this->persistent
+                $this->persistent,
+                $this->timeout
             );
         } else {
             throw new \Exception('Couchbase client missing!', 601);

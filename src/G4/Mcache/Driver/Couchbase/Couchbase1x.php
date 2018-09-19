@@ -17,14 +17,17 @@ class Couchbase1x implements CouchbaseInterface
 
     private $persistent;
 
+    private $timeout;
 
-    public function __construct($servers, $user, $pass, $bucket, $persistent)
+
+    public function __construct($servers, $user, $pass, $bucket, $persistent, $timeout)
     {
         $this->servers      = $servers;
         $this->user         = $user;
         $this->pass         = $pass;
         $this->bucket       = $bucket;
         $this->persistent   = $persistent;
+        $this->timeout      = $timeout;
     }
 
 
@@ -58,6 +61,7 @@ class Couchbase1x implements CouchbaseInterface
                 $this->bucket,
                 $this->persistent
             );
+            $this->client->setTimeout($this->timeout);
         }
         return $this->client;
     }

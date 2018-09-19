@@ -25,14 +25,16 @@ class Couchbase2x implements CouchbaseInterface
 
     private $persistent;
 
+    private $timeout;
 
-    public function __construct($servers, $user, $pass, $bucket, $persistent)
+    public function __construct($servers, $user, $pass, $bucket, $persistent, $timeout)
     {
         $this->server       = $servers[array_rand($servers)];
         $this->user         = $user;
         $this->pass         = $pass;
         $this->bucket       = $bucket;
         $this->persistent   = $persistent;
+        $this->timeout      = $timeout;
     }
 
 
@@ -99,6 +101,7 @@ class Couchbase2x implements CouchbaseInterface
                 $this->pass
             );
             $this->clientBucket = $this->clientCluster->openBucket($this->bucket);
+            //TODO: Drasko - add timeout option !
         }
         return $this->clientBucket;
     }
