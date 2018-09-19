@@ -51,6 +51,15 @@ $prefix = 'my_prefix';
     
 $mcache = \G4\Mcache\McacheFactory::createInstance($driverName, $options, $prefix);
 ```    
+
+#### Available options
+
+    * bucket - string
+    * servers - array
+    * user - string
+    * pass - string
+    * persistent - bool
+    * timeout - int (default 2500000)
     
 ### Methods
 
