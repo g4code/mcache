@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a7329d31c59c26d8ea5ceb64cbfc0e44",
+    "content-hash": "ee8faeb4977de69e3252a8124aaf80cf",
     "packages": [
         {
             "name": "aura/accept",
@@ -535,16 +535,16 @@
         },
         {
             "name": "g4/value-object",
-            "version": "2.40.7",
+            "version": "2.42.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/g4code/value-object.git",
-                "reference": "bd1b10c5e2bc2752bd28f7ece36eb23cbd45796c"
+                "reference": "0277d459e9d4ad23a824847d82071e9be7b343fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/g4code/value-object/zipball/bd1b10c5e2bc2752bd28f7ece36eb23cbd45796c",
-                "reference": "bd1b10c5e2bc2752bd28f7ece36eb23cbd45796c",
+                "url": "https://api.github.com/repos/g4code/value-object/zipball/0277d459e9d4ad23a824847d82071e9be7b343fe",
+                "reference": "0277d459e9d4ad23a824847d82071e9be7b343fe",
                 "shasum": ""
             },
             "require": {
@@ -584,7 +584,7 @@
                 }
             ],
             "description": "PHP value objects",
-            "time": "2018-07-10T12:11:27+00:00"
+            "time": "2019-06-10T08:42:55+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1108,6 +1108,7 @@
                 "paginator",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-paginator",
             "time": "2018-01-30T15:52:44+00:00"
         },
         {
@@ -1154,6 +1155,7 @@
                 "stdlib",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-stdlib",
             "time": "2018-08-28T21:34:05+00:00"
         }
     ],
@@ -1526,6 +1528,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2013-01-13T10:24:48+00:00"
         },
         {
