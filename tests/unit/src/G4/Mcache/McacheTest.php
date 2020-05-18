@@ -12,7 +12,7 @@ class McacheTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_driverStub = $this->getMock("\G4\Mcache\Driver\Libmemcached");
+        $this->_driverStub = $this->createMock(\G4\Mcache\Driver\Libmemcached::class);
         $this->_mcache     = new \G4\Mcache\Mcache($this->_driverStub);
 
         parent::setUp();
