@@ -96,9 +96,7 @@ class Couchbase2x implements CouchbaseInterface
     {
         if(! $this->clientBucket instanceof \CouchbaseBucket) {
             $this->clientCluster = new \CouchbaseCluster(
-                $this->server,
-                $this->user,
-                $this->pass
+                $this->server
             );
             $this->clientBucket = $this->clientCluster->openBucket($this->bucket);
             //TODO: Drasko - add timeout option !
