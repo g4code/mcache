@@ -39,7 +39,14 @@ class File extends DriverAbstract
     {
         $realCachePath = $this->formatCacheFilename($key);
 
-        $toSave = "<?php return \n" . var_export($value, true) . ';';
+        $toSave = "<?php 
+/**
+Config filename: " . json_decode($value, true)['pathname'] . "
+Environment: " . APPLICATION_ENV . "
+Date created: " . date("Y-m-d H:i:s") . "
+KEY ( md5 value of  usersOnline.UserId and driver prefix ) : " . $key . "
+*/
+return \n" . var_export($value, true) . ';';
 
         if(!touch($realCachePath)) {
             throw new \Exception('Cache file path is not writable');
