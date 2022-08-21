@@ -131,6 +131,7 @@ class Mcache
     private function execute($type)
     {
         $uniqueId = $this->profiler->start();
+        $this->driver->setKeyParts($this->concatKeyParts());
         switch ($type) {
             case self::TYPE_GET:
                 $response = $this->transformValue($this->driver->get($this->getKey()));

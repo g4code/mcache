@@ -56,4 +56,8 @@ abstract class DriverAbstract implements DriverInterface
     {
         return $this->options;
     }
+
+    public function setKeyParts($keyParts)
+    {
+    }
 }

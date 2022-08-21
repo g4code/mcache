@@ -21,4 +21,5 @@ interface DriverInterface
 
     public function getOptions();
 
+    public function setKeyParts($keyParts);
 }
