@@ -13,6 +13,11 @@ class File extends DriverAbstract
      */
     private $cachePath;
 
+    /**
+     * @var string
+     */
+    private $keyParts;
+
 
     public function delete($key)
     {
@@ -35,24 +40,57 @@ class File extends DriverAbstract
         return $this->set($key, $value, $expiration);
     }
 
+    public function setKeyParts($keyParts)
+    {
+        $this->keyParts = $keyParts;
+    }
+
     public function set($key, $value, $expiration)
     {
         $realCachePath = $this->formatCacheFilename($key);
 
-        $toSave = "<?php 
+        $tpl =<<<EOF
+<?php
 /**
-Config filename: " . json_decode($value, true)['pathname'] . "
-Environment: " . APPLICATION_ENV . "
-Date created: " . date("Y-m-d H:i:s") . "
-KEY ( md5 value of  usersOnline.UserId and driver prefix ) : " . $key . "
+g4/mcache file driver metadata
+%s
+Date created: %s
+Key: %s
+Key parts: %s
+Expiration: %s
 */
-return \n" . var_export($value, true) . ';';
 
+return %s;
+EOF;
+        $toSave = sprintf($tpl,
+            $this->getEnvironment(),
+            date("Y-m-d H:i:s"),
+            $key,
+            $this->keyParts,
+            $expiration,
+            var_export($value, true)
+        );
+        
         if(!touch($realCachePath)) {
             throw new \Exception('Cache file path is not writable');
         }
 
         return file_put_contents($realCachePath, $toSave);
+    }
+
+    private function getEnvironment()
+    {
+        $envVars = ['APPLICATION_ENV', 'APP_ENV', 'ENV'];
+        $env = [];
+        foreach ($envVars as $var) {
+            if (defined($var)) {
+                $env[] = 'constant('. $var .'): ' . constant($var);
+            }
+            if (getenv($var)) {
+                $env[] = 'getenv(' . $var . '): ' . getenv($var);
+            }
+        }
+        return 'Environment: ' . (count($env) ? implode(', ', $env) : 'null');
     }
 
     private function formatCacheFilename($key)
