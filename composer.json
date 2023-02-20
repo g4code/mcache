@@ -30,7 +30,7 @@
   },
   "require": {
     "php"             : ">=5.6",
-    "g4/profiler"     : "*",
+    "g4/profiler"     : ">=1.10.0",
     "g4/value-object" : "*"
   }
 }
