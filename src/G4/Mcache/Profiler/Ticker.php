@@ -5,6 +5,9 @@ namespace G4\Mcache\Profiler;
 class Ticker extends \G4\Profiler\Ticker\TickerAbstract
 {
 
+    const NAME = 'mcache';
+    const TYPE = 'cache';
+
     private static $instance;
 
     private function __construct() {}
@@ -36,7 +39,15 @@ class Ticker extends \G4\Profiler\Ticker\TickerAbstract
      */
     public function getName()
     {
-        return 'mcache';
+        return self::NAME;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return self::TYPE;
     }
 
     /**
