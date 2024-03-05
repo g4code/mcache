@@ -2,6 +2,10 @@
 
 namespace G4\Mcache\Driver\Couchbase;
 
+/**
+ * @psalm-suppress PropertyNotSetInConstructor
+ * @psalm-suppress UndefinedDocblockClass
+ */
 class Couchbase2x implements CouchbaseInterface
 {
 
@@ -11,25 +15,45 @@ class Couchbase2x implements CouchbaseInterface
     private $clientCluster;
 
     /**
-     * @var
+     * @var \CouchbaseBucket
      */
     private $clientBucket;
 
-    private $server;
+    /**
+     * @var array
+     */
+    private $servers;
 
+    /**
+     * @var string
+     */
     private $user;
 
+    /**
+     * @var string
+     */
     private $pass;
 
+    /**
+     * @var string
+     */
     private $bucket;
 
     private $persistent;
 
     private $timeout;
 
+    /**
+     * @param array $servers
+     * @param string $user
+     * @param string $pass
+     * @param string $bucket
+     * @param bool $persistent
+     * @param int $timeout
+     */
     public function __construct($servers, $user, $pass, $bucket, $persistent, $timeout)
     {
-        $this->server       = $servers[array_rand($servers)];
+        $this->servers      = $servers;
         $this->user         = $user;
         $this->pass         = $pass;
         $this->bucket       = $bucket;
@@ -94,14 +118,41 @@ class Couchbase2x implements CouchbaseInterface
 
     public function clientFactory()
     {
-        if(! $this->clientBucket instanceof \CouchbaseBucket) {
-            $this->clientCluster = new \CouchbaseCluster(
-                $this->server
-            );
-            $this->clientBucket = $this->clientCluster->openBucket($this->bucket);
-            //TODO: Drasko - add timeout option !
+        if ($this->clientBucket instanceof \CouchbaseBucket) {
+            return $this->clientBucket;
         }
+        $this->connect();
         return $this->clientBucket;
+    }
+
+    /**
+     * @return void
+     */
+    private function connect()
+    {
+        // randomize servers
+        $servers = $this->servers;
+        shuffle($servers);
+
+        foreach ($servers as $server) {
+            try {
+                $this->clientCluster = new \CouchbaseCluster($server);
+
+                if ($this->user && $this->pass) {
+                    $this->clientCluster->authenticateAs($this->user, $this->pass);
+                }
+
+                $this->clientBucket = $this->clientCluster->openBucket($this->bucket);
+                $this->clientBucket->operationTimeout = $this->timeout;
+                break;
+            } catch (\Exception $e) {
+                trigger_error(
+                    __METHOD__ . ' : ' . $server . ' does not answer "' . $e->getMessage() . '" (' . $e->getCode(
+                    ) . '), trying another one ...', E_USER_WARNING
+                );
+                continue;
+            }
+        }
     }
 
 }
