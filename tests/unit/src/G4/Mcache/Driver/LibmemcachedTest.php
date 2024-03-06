@@ -2,27 +2,23 @@
 
 use G4\Mcache\Mcache;
 
-class LibmemcachedTest extends \PHPUnit_Framework_TestCase
+class LibmemcachedTest extends \PHPUnit\Framework\TestCase
 {
 
-    private $_driver;
+    private $driver;
 
 
-    public function setUp()
+    public function setUp(): void
     {
-        $this->_driver = new \G4\Mcache\Driver\Libmemcached();
-
-        parent::setUp();
+        $this->driver = new \G4\Mcache\Driver\Libmemcached();
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset(
-            $this->_driver
+            $this->driver
         );
-
-        parent::tearDown();
     }
 
     public function testGet()

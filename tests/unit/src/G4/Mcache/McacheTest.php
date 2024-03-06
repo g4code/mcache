@@ -2,7 +2,7 @@
 
 use G4\Mcache\Mcache;
 
-class McacheTest extends \PHPUnit_Framework_TestCase
+class McacheTest extends \PHPUnit\Framework\TestCase
 {
 
     private $_driverStub;
@@ -10,23 +10,19 @@ class McacheTest extends \PHPUnit_Framework_TestCase
     private $_mcache;
 
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_driverStub = $this->createMock(\G4\Mcache\Driver\Libmemcached::class);
         $this->_mcache     = new \G4\Mcache\Mcache($this->_driverStub);
-
-        parent::setUp();
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset(
             $this->_driverStub,
             $this->_mcache
         );
-
-        parent::tearDown();
     }
 
 

@@ -4,19 +4,19 @@ use G4\Mcache\FileCache;
 use G4\ValueObject\StringLiteral;
 use G4\ValueObject\Pathname;
 
-class FileCacheTest extends \PHPUnit_Framework_TestCase
+class FileCacheTest extends \PHPUnit\Framework\TestCase
 {
 
     private $pathname;
     private $key;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->pathname = new Pathname('');
         $this->key = new StringLiteral('KEY');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->pathname = null;
         $this->key = null;

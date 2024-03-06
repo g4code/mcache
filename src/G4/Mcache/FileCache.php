@@ -123,7 +123,11 @@ class FileCache
 
     private function getFromCache()
     {
-        return json_decode($this->mcache->get(), true);
+        $value = $this->mcache->get();
+        if (!$value) {
+            return null;
+        }
+        return json_decode($value, true);
     }
 
     private function setToCache()

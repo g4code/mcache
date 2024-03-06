@@ -6,7 +6,7 @@ use G4\ValueObject\Pathname;
 use G4\Mcache\McacheFactory;
 
 //TODO: Drasko - move to functional tests !
-class McacheFIleTest extends \PHPUnit_Framework_TestCase
+class McacheFIleTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -18,7 +18,7 @@ class McacheFIleTest extends \PHPUnit_Framework_TestCase
 
     private $data;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $driverName = 'File';
         $options = [
@@ -33,7 +33,7 @@ class McacheFIleTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->mcache   = null;
         $this->key      = null;
