@@ -4,12 +4,13 @@ namespace G4\Mcache\Driver;
 
 use G4\Mcache\Driver\Couchbase\Couchbase1x;
 use G4\Mcache\Driver\Couchbase\Couchbase2x;
+use G4\Mcache\Driver\Couchbase\Couchbase4x;
 use G4\Mcache\Driver\Couchbase\CouchbaseInterface;
 
 class Couchbase extends DriverAbstract
 {
 
-    const DEFAULT_TIMEOUT_VALUE = 2500000; // time in microseconds
+    private const DEFAULT_TIMEOUT_VALUE = 500000; // time in microseconds
 
     /**
      * @var array
@@ -26,10 +27,19 @@ class Couchbase extends DriverAbstract
      */
     private $user;
 
+    /**
+     * @var string
+     */
     private $pass;
 
+    /**
+     * @var bool
+     */
     private $persistent;
 
+    /**
+     * @var int
+     */
     private $timeout;
 
     /**
@@ -58,10 +68,10 @@ class Couchbase extends DriverAbstract
             $this->servers[] = $server;
         }
         $this->bucket       = $options['bucket'];
-        $this->user         = isset($options['user'])       ? $options['user']              : '';
-        $this->pass         = isset($options['pass'])       ? $options['pass']              : '';
-        $this->persistent   = isset($options['persistent']) ? (bool) $options['persistent'] : false;
-        $this->timeout      = isset($options['timeout'])    ? (int) $options['timeout']     : self::DEFAULT_TIMEOUT_VALUE;
+        $this->user         = $options['user'] ?? '';
+        $this->pass         = $options['pass'] ?? '';
+        $this->persistent   = isset($options['persistent']) && (bool)$options['persistent'];
+        $this->timeout      = isset($options['timeout']) ? (int) $options['timeout'] : self::DEFAULT_TIMEOUT_VALUE;
 
         return $this;
     }
@@ -103,7 +113,9 @@ class Couchbase extends DriverAbstract
                 $this->persistent,
                 $this->timeout
             );
-        } else if (class_exists('\CouchbaseCluster')) {
+            return $this->driver;
+        }
+        if (class_exists('\CouchbaseCluster')) {
             $this->driver = new Couchbase2x(
                 $this->servers,
                 $this->user,
@@ -112,9 +124,21 @@ class Couchbase extends DriverAbstract
                 $this->persistent,
                 $this->timeout
             );
-        } else {
-            throw new \Exception('Couchbase client missing!', 601);
+            return $this->driver;
         }
-        return $this->driver;
+
+        if (class_exists('\Couchbase\Cluster')) {
+            $this->driver = new Couchbase4x(
+                $this->servers,
+                $this->user,
+                $this->pass,
+                $this->bucket,
+                $this->persistent,
+                $this->timeout
+            );
+            return $this->driver;
+        }
+
+        throw new \Exception('Couchbase client missing!', 601);
     }
 }

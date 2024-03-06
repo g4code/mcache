@@ -20,3 +20,5 @@ vendor
 tests/unit/coverage/
 tests/unit/fixtures/*
 !tests/unit/fixtures/.gitkeep
+tests/unit/.phpunit.cache
+tests/unit/.phpunit.result.cache
