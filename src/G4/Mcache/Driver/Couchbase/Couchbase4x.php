@@ -3,9 +3,11 @@
 namespace G4\Mcache\Driver\Couchbase;
 
 use Couchbase\ClusterOptions;
+use Couchbase\GetOptions;
 use Couchbase\Cluster;
 use Couchbase\UpsertOptions;
 use Couchbase\ReplaceOptions;
+use G4\Mcache\SerializeTranscoder;
 
 class Couchbase4x implements CouchbaseInterface
 {
@@ -32,8 +34,7 @@ class Couchbase4x implements CouchbaseInterface
             return false;
         }
         try {
-            $mutationResult = $this->clientFactory()->defaultCollection()->remove($key);
-            return $mutationResult->cas();
+            return $this->clientFactory()->defaultCollection()->remove($key)->cas();
         } catch (\Exception $e) {
             return false;
         }
@@ -44,8 +45,11 @@ class Couchbase4x implements CouchbaseInterface
         if (!$this->clientFactory()) {
             return false;
         }
+
+        $options = new GetOptions();
+        $options->transcoder(new SerializeTranscoder());
         try {
-            return $this->clientFactory()->defaultCollection()->get($key)->content();
+            return $this->clientFactory()->defaultCollection()->get($key, $options)->content();
         } catch (\Exception $e) {
             return false;
         }
@@ -58,6 +62,7 @@ class Couchbase4x implements CouchbaseInterface
         }
         $replaceOptions = (new ReplaceOptions())
             ->expiry($expiration);
+        $replaceOptions->transcoder(new SerializeTranscoder());
         try {
             $mutationResult = $this->clientFactory()->defaultCollection()->replace($key, $value, $replaceOptions);
             return $mutationResult->cas();
@@ -71,8 +76,10 @@ class Couchbase4x implements CouchbaseInterface
         if (!$this->clientFactory()) {
             return false;
         }
+
         $upsertOptions = (new UpsertOptions())
-            ->expiry($expiration);
+            ->expiry($expiration)
+            ->transcoder(new SerializeTranscoder());
         try {
             $mutationResult = $this->clientFactory()->defaultCollection()->upsert($key, $value, $upsertOptions);
             return $mutationResult->cas();
